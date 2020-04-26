@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    Create ingredients
+{% endblock %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'create-page' %}">
+        {% csrf_token %}
+
+        <div class="container__create">
+            {% for i in form %}
+
+                <p>{{ i.label }}</p>
+                <p>{{ i }}</p>
+
+                <div class="container__error">
+                    {% if i.errors %}
+                        {{ i.errors }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" name="button">
+                Create ingredient
+            </button>
+        </div>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    Pizza
+{% endblock %}
+
+{% block content %}
+    <form id="form__order"  class="main__form">
+    {% csrf_token %}
+        {% for group in groups %}
+
+            <div class="container">
+                <div class="container__titles">
+
+                    <h2>{{ group.group.title }}</h2>
+
+                    <a href='{% url 'create-page' %}' class="button__crud">
+                        <img src="{% static 'media/plus.png' %}" class="img_crud">
+                    </a>
+
+                </div>
+                <div class="container">
+
+                    {% for ingredient in ingredients %}
+                        {% if group.id == 1 and ingredient.group_id == 1 %}
+                            <div class="container__ingredients dough">
+                                <p>{{ ingredient.name }}</p>
+                                <p>({{ ingredient.price }}$)</p>
+                                <input type="radio"
+                                       name="dough"
+                                       value="1"
+                                       class="get__radio"
+                                       data-ingredient_name="{{ ingredient.name }}"><br>
+                            </div>
+                        {% elif group.id == ingredient.group.id %}
+
+                            <div class="container__ingredients">
+
+                                <p>{{ ingredient.name }}</p>
+                                <p>({{ ingredient.price }}$)</p>
+
+                                <a href="{% url 'edit-page' name=ingredient.name %}" class="button__crud">
+                                    <img src="{% static 'media/edit (1).png' %}" class="img_crud"></a>
+                                <a href="delete/{{ ingredient.name }}" class="button__crud">
+                                    <img src="{% static 'media/remove.png' %}" class="img_crud"></a>
+
+                                <input type="number" name="number" step="1" class="get__number" value="0"
+                                       data-ingredient_name="{{ ingredient.name }}"
+                                       data-ingredient_price="{{ ingredient.price }}"
+                                >
+
+                                {% if i.errors %}
+                                    {{ i.errors }}
+                                {% endif %}
+
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="container__center">
+            <button type="submit" id="submit__btn">SUBMIT</button>
+        </div>
+    </form>
+
+{% endblock %}

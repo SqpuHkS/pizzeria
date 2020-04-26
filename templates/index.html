@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Default title
+        {% endblock %}
+
+    </title>
+
+<link rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/main_page.css' %}">
+
+<link rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/order_page.css' %}">
+
+</head>
+<body>
+    {% block content %}
+        Text
+    {% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}" type="text/javascript"></script>
+
+</body>
+</html>

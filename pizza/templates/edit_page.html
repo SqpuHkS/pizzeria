@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    Edit Ingredient
+{% endblock %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'edit-page' name=obj.name%}">
+        {% csrf_token %}
+
+        <div class="container__create">
+            {% for i in form %}
+
+                <p>{{ i.label }}</p>
+                <p>{{ i }}</p>
+
+                <div class="container__error">
+                    {% if i.errors %}
+                        {{ i.errors }}
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+
+            <button type="submit" name="button">
+                Edit ingredient
+            </button>
+        </div>
+    </form>
+
+{% endblock %}
